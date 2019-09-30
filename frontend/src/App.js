@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
 
@@ -9,21 +8,25 @@ class Table extends Component {
     render() {
         const {books} = this.props;
         return (
-            <div className="table">
-                <div className="table-header">
-                    <span style={{width: '40%'}}>Author</span>
-                    <span style={{width: '30%'}}>Title</span>
-                    <span style={{width: '10%'}}>Date Published</span>
-                </div>
+            <table className="highlight">
+                <thead className="table-header">
+                    <tr>
+                        <th>Author</th>
+                        <th>Title</th>
+                        <th>Date Published</th>
+                    </tr>
+                </thead>
 
-                {books.map(book =>
-                    <div key={book.id} className="table-row">
-                        <span style={{width: '40%'}}>{book.author}</span>
-                        <span style={{width: '30%'}}>{book.title}</span>
-                        <span style={{width: '20%'}}>{book.date_published}</span>
-                    </div>)}
+                <tbody>
+                    {books.map(book =>
+                        <tr key={book.id}>
+                            <td>{book.author}</td>
+                            <td>{book.title}</td>
+                            <td>{book.date_published}</td>
+                        </tr>)}
+                </tbody>
 
-            </div>
+            </table>
         );
     }
 }
