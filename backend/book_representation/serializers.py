@@ -7,7 +7,9 @@ class BookSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'author',
-            'title',
             'date_published',
+            'language',
+            'title',
+            'wiki_link',
         )
         model = Book
