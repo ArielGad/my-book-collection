@@ -8,8 +8,9 @@ class Table extends Component {
             <table className="highlight">
                 <thead className="table-header">
                 <tr>
-                    <th>Author</th>
                     <th>Title</th>
+                    <th>Author</th>
+                    <th>Language</th>
                     <th>Date Published</th>
                 </tr>
                 </thead>
@@ -17,9 +18,11 @@ class Table extends Component {
                 <tbody>
                 {books.map(book =>
                     <tr key={book.id}>
+                        <td><a href={book.wiki_link} target="_blank" rel="noopener noreferrer">{book.title}</a></td>
                         <td>{book.author}</td>
-                        <td>{book.title}</td>
+                        <td>{book.language}</td>
                         <td>{book.date_published}</td>
+
                     </tr>)}
                 </tbody>
 
