@@ -1,35 +1,8 @@
 import React, {Component} from 'react';
-import './App.css';
+
 import axios from 'axios';
 
-
-class Table extends Component {
-
-    render() {
-        const {books} = this.props;
-        return (
-            <table className="highlight">
-                <thead className="table-header">
-                    <tr>
-                        <th>Author</th>
-                        <th>Title</th>
-                        <th>Date Published</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    {books.map(book =>
-                        <tr key={book.id}>
-                            <td>{book.author}</td>
-                            <td>{book.title}</td>
-                            <td>{book.date_published}</td>
-                        </tr>)}
-                </tbody>
-
-            </table>
-        );
-    }
-}
+import Table from './components/Table'
 
 
 class App extends Component {
@@ -41,7 +14,6 @@ class App extends Component {
             error: null,
         };
     }
-
 
     componentDidMount(){
         const url = 'http://127.0.0.1:8000/api/';
