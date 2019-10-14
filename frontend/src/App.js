@@ -18,6 +18,14 @@ class App extends Component {
 
         this.togglePopup = this.togglePopup.bind(this);
         this.handleOkButtonChange = this.handleOkButtonChange.bind(this);
+        this.onDeleteBookHandle = this.onDeleteBookHandle.bind(this);
+        this.loadBooksFromServer = this.loadBooksFromServer.bind(this);
+    }
+
+    onDeleteBookHandle(bookId){
+        axios.delete(`http://127.0.0.1:8000/api/${bookId}/`)
+            .then(() => this.loadBooksFromServer())
+            .catch(error => console.log('ERROR IS: ', error));
     }
 
     togglePopup() {
@@ -32,11 +40,15 @@ class App extends Component {
         this.setState({books: updatedBookList})
     }
 
-    componentDidMount(){
+    loadBooksFromServer() {
         const url = 'http://127.0.0.1:8000/api/';
         axios(url)
             .then(result => this.setState({books: result.data}))
             .catch(error => console.error(error));
+    }
+
+    componentDidMount(){
+        this.loadBooksFromServer();
     }
 
     render() {
@@ -48,7 +60,7 @@ class App extends Component {
                     <Popup closePopup={this.togglePopup} onOkButtonChange={this.handleOkButtonChange}/>
                     : null
                 }
-                <Table books={books}/>
+                <Table books={books} onDeleteBookHandle={this.onDeleteBookHandle}/>
             </div>
         );
     }
