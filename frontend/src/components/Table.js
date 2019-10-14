@@ -1,9 +1,10 @@
 import React, {Component} from "react";
-
+import Button from './Button'
 
 class Table extends Component {
+
     render() {
-        const {books} = this.props;
+        const {books, onDeleteBookHandle} = this.props;
         return (
             <table className="highlight">
                 <thead className="table-header">
@@ -22,6 +23,7 @@ class Table extends Component {
                         <td>{book.author}</td>
                         <td>{book.language}</td>
                         <td>{book.date_published}</td>
+                        <td>{<Button onClick={() => onDeleteBookHandle(book.id)}>Delete Book</Button>}</td>
 
                     </tr>)}
                 </tbody>
