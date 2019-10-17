@@ -1,35 +1,54 @@
 import React, {Component} from "react";
 import Button from './Button'
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
 
-class Table extends Component {
+const classes = {
+    root: {
+        width: '100%',
+        overflowX: 'auto',
+    },
+    table: {
+        minWidth: 650,
+    },
+};
 
+class TableARIEL extends Component {
     render() {
+
         const {books, onDeleteBookHandle} = this.props;
         return (
-            <table className="highlight">
-                <thead className="table-header">
-                <tr>
-                    <th>Title</th>
-                    <th>Author</th>
-                    <th>Language</th>
-                    <th>Date Published</th>
-                </tr>
-                </thead>
+            <Paper className={classes.root}>
+                <Table className={classes.table} aria-label="simple table">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Title</TableCell>
+                            <TableCell align="right">Author</TableCell>
+                            <TableCell align="right">Language</TableCell>
+                            <TableCell align="right">Date Published</TableCell>
+                        </TableRow>
+                    </TableHead>
 
-                <tbody>
-                {books.map(book =>
-                    <tr key={book.id}>
-                        <td><a href={book.wiki_link} target="_blank" rel="noopener noreferrer">{book.title}</a></td>
-                        <td>{book.author}</td>
-                        <td>{book.language}</td>
-                        <td>{book.date_published}</td>
-                        <td>{<Button onClick={() => onDeleteBookHandle(book.id)}>Delete Book</Button>}</td>
-
-                    </tr>)}
-                </tbody>
-
-            </table>
+                    <TableBody>
+                        {books.map(book =>
+                            <TableRow key={book.id}>
+                                <TableCell component="th" scope="row"><a href={book.wiki_link} target="_blank"
+                                                                         rel="noopener noreferrer">{book.title}</a></TableCell>
+                                <TableCell align="right">{book.author}</TableCell>
+                                <TableCell align="right">{book.language}</TableCell>
+                                <TableCell align="right">{book.date_published}</TableCell>
+                                <TableCell align="right">{<Button onClick={() => onDeleteBookHandle(book.id)}>Delete
+                                    Book</Button>}</TableCell>
+                            </TableRow>
+                        )}
+                    </TableBody>
+                </Table>
+            </Paper>
         );
     }
 }
-export default Table;
+export default TableARIEL;
