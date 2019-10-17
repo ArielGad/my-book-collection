@@ -5,6 +5,10 @@ import axios from 'axios';
 import Table from './components/Table'
 import Button from './components/Button'
 import Popup from './components/Popup'
+import Navbar from './components/layout/Navbar'
+
+import AddButton from './components/buttons/AddButton'
+
 
 
 class App extends Component {
@@ -55,12 +59,13 @@ class App extends Component {
         const {books, showPopup} = this.state;
         return (
             <div >
-                <Button onClick={this.togglePopup}>Add a book</Button>
+                <Navbar/>
+                <AddButton onClick={this.togglePopup}/>
                 {showPopup ?
                     <Popup closePopup={this.togglePopup} onOkButtonChange={this.handleOkButtonChange}/>
                     : null
                 }
-                <Table books={books} onDeleteBookHandle={this.onDeleteBookHandle}/>
+                <Table books={books} onDeleteBookHandle={this.onDeleteBookHandle} />
             </div>
         );
     }
