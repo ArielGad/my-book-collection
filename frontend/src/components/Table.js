@@ -12,8 +12,9 @@ const classes = {
         width: '100%',
         overflowX: 'auto',
     },
-    table: {
-        minWidth: 650,
+    tableWrapper: {
+        maxHeight: 440,
+        overflow: 'auto',
     },
 };
 
@@ -23,13 +24,14 @@ class TableARIEL extends Component {
         const {books, onDeleteBookHandle} = this.props;
         return (
             <Paper className={classes.root}>
-                <Table className={classes.table} aria-label="simple table">
+                <div className={classes.tableWrapper}>
+                <Table stickyHeader aria-label="sticky table">
                     <TableHead>
                         <TableRow>
-                            <TableCell>Title</TableCell>
-                            <TableCell align="right">Author</TableCell>
-                            <TableCell align="right">Language</TableCell>
-                            <TableCell align="right">Date Published</TableCell>
+                            <TableCell><strong>Title</strong></TableCell>
+                            <TableCell align="right"><strong>Author</strong></TableCell>
+                            <TableCell align="right"><strong>Language</strong></TableCell>
+                            <TableCell align="right"><strong>Date Published</strong></TableCell>
                         </TableRow>
                     </TableHead>
 
@@ -47,6 +49,7 @@ class TableARIEL extends Component {
                         )}
                     </TableBody>
                 </Table>
+                </div>
             </Paper>
         );
     }
