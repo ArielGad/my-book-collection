@@ -1,13 +1,14 @@
-import React, {Component} from "react";
-import Button from './Button'
+import React from "react";
+import {makeStyles} from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import DeleteButton from './buttons/DeleteButton'
 
-const classes = {
+const useStyles = makeStyles({
     root: {
         width: '100%',
         overflowX: 'auto',
@@ -16,15 +17,15 @@ const classes = {
         maxHeight: 440,
         overflow: 'auto',
     },
-};
+});
 
-class TableARIEL extends Component {
-    render() {
 
-        const {books, onDeleteBookHandle} = this.props;
-        return (
-            <Paper className={classes.root}>
-                <div className={classes.tableWrapper}>
+function TableBooks(props) {
+    const classes = useStyles();
+    const {books, onDeleteBookHandle} = props;
+    return (
+        <Paper className={classes.root}>
+            <div className={classes.tableWrapper}>
                 <Table stickyHeader aria-label="sticky table">
                     <TableHead>
                         <TableRow>
@@ -43,15 +44,15 @@ class TableARIEL extends Component {
                                 <TableCell align="right">{book.author}</TableCell>
                                 <TableCell align="right">{book.language}</TableCell>
                                 <TableCell align="right">{book.date_published}</TableCell>
-                                <TableCell align="right">{<Button onClick={() => onDeleteBookHandle(book.id)}>Delete
-                                    Book</Button>}</TableCell>
+                                <TableCell align="right">{<DeleteButton
+                                    onClick={() => onDeleteBookHandle(book.id)}/>}</TableCell>
                             </TableRow>
                         )}
                     </TableBody>
                 </Table>
-                </div>
-            </Paper>
-        );
-    }
+            </div>
+        </Paper>
+    );
 }
-export default TableARIEL;
+
+export default TableBooks;
