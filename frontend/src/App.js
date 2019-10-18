@@ -2,9 +2,11 @@ import React, {Component} from 'react';
 
 import axios from 'axios';
 
-import Table from './components/Table'
-import Button from './components/Button'
-import Popup from './components/Popup'
+import TableBooks from './components/Table'
+import Navbar from './components/layout/Navbar'
+import BookForm from './components/BookForm'
+
+
 
 
 class App extends Component {
@@ -13,10 +15,7 @@ class App extends Component {
 
         this.state = {
             books: [],
-            showPopup: false,
     };
-
-        this.togglePopup = this.togglePopup.bind(this);
         this.handleOkButtonChange = this.handleOkButtonChange.bind(this);
         this.onDeleteBookHandle = this.onDeleteBookHandle.bind(this);
         this.loadBooksFromServer = this.loadBooksFromServer.bind(this);
@@ -26,12 +25,6 @@ class App extends Component {
         axios.delete(`http://127.0.0.1:8000/api/${bookId}/`)
             .then(() => this.loadBooksFromServer())
             .catch(error => console.log('ERROR IS: ', error));
-    }
-
-    togglePopup() {
-        this.setState({
-            showPopup: !this.state.showPopup
-        });
     }
 
     handleOkButtonChange(newBookList){
@@ -52,15 +45,12 @@ class App extends Component {
     }
 
     render() {
-        const {books, showPopup} = this.state;
+        const {books} = this.state;
         return (
-            <div >
-                <Button onClick={this.togglePopup}>Add a book</Button>
-                {showPopup ?
-                    <Popup closePopup={this.togglePopup} onOkButtonChange={this.handleOkButtonChange}/>
-                    : null
-                }
-                <Table books={books} onDeleteBookHandle={this.onDeleteBookHandle}/>
+            <div>
+                <Navbar/>
+                <BookForm onOkButtonChange={this.handleOkButtonChange}/>
+                <TableBooks books={books} onDeleteBookHandle={this.onDeleteBookHandle} />
             </div>
         );
     }
