@@ -2,12 +2,11 @@ import React, {Component} from 'react';
 
 import axios from 'axios';
 
-import Table from './components/Table'
-import Button from './components/Button'
+import TableBooks from './components/Table'
 import Popup from './components/Popup'
 import Navbar from './components/layout/Navbar'
-
 import AddButton from './components/buttons/AddButton'
+
 
 
 
@@ -58,14 +57,14 @@ class App extends Component {
     render() {
         const {books, showPopup} = this.state;
         return (
-            <div >
+            <div>
                 <Navbar/>
                 <AddButton onClick={this.togglePopup}/>
                 {showPopup ?
                     <Popup closePopup={this.togglePopup} onOkButtonChange={this.handleOkButtonChange}/>
                     : null
                 }
-                <Table books={books} onDeleteBookHandle={this.onDeleteBookHandle} />
+                <TableBooks books={books} onDeleteBookHandle={this.onDeleteBookHandle} />
             </div>
         );
     }
