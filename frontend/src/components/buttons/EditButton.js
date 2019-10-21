@@ -1,10 +1,9 @@
 import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
-import AddIcon from '@material-ui/icons/Add';
+import EditIcon from '@material-ui/icons/Edit';
 import Tooltip from '@material-ui/core/Tooltip';
-import BookForm from '../BookForm'
-
+import EditBookDetailsForm from '../Forms/EditBookDetailsForm';
 
 const useStyles = makeStyles(theme => ({
     fab: {
@@ -17,7 +16,8 @@ const useStyles = makeStyles(theme => ({
 
 
 
-export default function AddButton(props) {
+export default function EditButton(props) {
+    const classes = useStyles();
 
     const handleClose = () => {
         setOpen(false);
@@ -27,19 +27,16 @@ export default function AddButton(props) {
         setOpen(true);
     };
 
-    const classes = useStyles();
     const [open, setOpen] = useState(false);
     return (
-        <Tooltip title="Add new book">
-            <Fab
-                 color="primary"
-                 aria-label="add"
-                 className={classes.fab}>
-                <AddIcon onClick={() => handleOpen()}/>
-                <BookForm
+        <Tooltip title="Edit fields">
+            <Fab size="small" color="secondary" aria-label="edit" className={classes.fab}>
+                <EditIcon onClick={() => handleOpen()}/>
+                <EditBookDetailsForm
                     open={open}
                     handleClose={handleClose}
-                    onOkButtonChange={props.onOkButtonChange}/>
+                    bookDetails={props.bookDetails}
+                    onSaveChanges={props.onSaveChanges}/>
             </Fab>
         </Tooltip>
     );

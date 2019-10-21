@@ -7,6 +7,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import DeleteButton from './buttons/DeleteButton'
+import EditButton from './buttons/EditButton'
 
 const useStyles = makeStyles({
     root: {
@@ -22,7 +23,7 @@ const useStyles = makeStyles({
 
 function TableBooks(props) {
     const classes = useStyles();
-    const {books, onDeleteBookHandle} = props;
+    const {books, onDeleteBookHandle, onSaveChanges} = props;
     return (
         <Paper className={classes.root}>
             <div className={classes.tableWrapper}>
@@ -44,8 +45,8 @@ function TableBooks(props) {
                                 <TableCell align="right">{book.author}</TableCell>
                                 <TableCell align="right">{book.language}</TableCell>
                                 <TableCell align="right">{book.date_published}</TableCell>
-                                <TableCell align="right">{<DeleteButton
-                                    onClick={() => onDeleteBookHandle(book.id)}/>}</TableCell>
+                                <TableCell align="right">{<DeleteButton onClick={() => onDeleteBookHandle(book.id)}/>}</TableCell>
+                                <TableCell align="left">{<EditButton bookDetails={book} onSaveChanges={onSaveChanges}/>}</TableCell>
                             </TableRow>
                         )}
                     </TableBody>

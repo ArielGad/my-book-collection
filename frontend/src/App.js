@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import TableBooks from './components/Table'
 import Navbar from './components/layout/Navbar'
-import BookForm from './components/BookForm'
+import AddButton from './components/buttons/AddButton'
 
 
 
@@ -27,10 +27,8 @@ class App extends Component {
             .catch(error => console.log('ERROR IS: ', error));
     }
 
-    handleOkButtonChange(newBookList){
-        const oldBooks = this.state.books;
-        const updatedBookList = [...oldBooks, ...newBookList];
-        this.setState({books: updatedBookList})
+    handleOkButtonChange(){
+        this.loadBooksFromServer();
     }
 
     loadBooksFromServer() {
@@ -49,8 +47,11 @@ class App extends Component {
         return (
             <div>
                 <Navbar/>
-                <BookForm onOkButtonChange={this.handleOkButtonChange}/>
-                <TableBooks books={books} onDeleteBookHandle={this.onDeleteBookHandle} />
+                <AddButton onOkButtonChange={this.handleOkButtonChange}/>
+                <TableBooks
+                    books={books}
+                    onDeleteBookHandle={this.onDeleteBookHandle}
+                    onSaveChanges={this.handleOkButtonChange}/>
             </div>
         );
     }
