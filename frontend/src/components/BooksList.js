@@ -6,8 +6,10 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import DeleteButton from './buttons/DeleteButton'
-import EditButton from './buttons/EditButton'
+import DeleteButton from './buttons/DeleteButton';
+import EditButton from './buttons/EditButton';
+import { connect } from 'react-redux';
+import {deleteBook} from '../actions/index';
 
 const useStyles = makeStyles({
     root: {
@@ -21,9 +23,9 @@ const useStyles = makeStyles({
 });
 
 
-function TableBooks(props) {
+function BooksList(props) {
     const classes = useStyles();
-    const {books, onDeleteBookHandle, onSaveChanges} = props;
+    const {books, deleteBook} = props;
     return (
         <Paper className={classes.root}>
             <div className={classes.tableWrapper}>
@@ -45,8 +47,8 @@ function TableBooks(props) {
                                 <TableCell align="right">{book.author}</TableCell>
                                 <TableCell align="right">{book.language}</TableCell>
                                 <TableCell align="right">{book.date_published}</TableCell>
-                                <TableCell align="right">{<DeleteButton onClick={() => onDeleteBookHandle(book.id)}/>}</TableCell>
-                                <TableCell align="left">{<EditButton bookDetails={book} onSaveChanges={onSaveChanges}/>}</TableCell>
+                                <TableCell align="right">{<DeleteButton onClick={() => deleteBook(book.id)}/>}</TableCell>
+                                <TableCell align="left">{<EditButton bookDetails={book}/>}</TableCell>
                             </TableRow>
                         )}
                     </TableBody>
@@ -56,4 +58,12 @@ function TableBooks(props) {
     );
 }
 
-export default TableBooks;
+function mapStateToProps (state) {
+    return {books: state.booksReducer.books};
+};
+
+function mapDispatchToProps(dispatch) {
+    return {deleteBook: (bookId) => dispatch(deleteBook(bookId)),}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(BooksList);

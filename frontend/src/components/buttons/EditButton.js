@@ -36,7 +36,7 @@ export default function EditButton(props) {
                     open={open}
                     handleClose={handleClose}
                     bookDetails={props.bookDetails}
-                    onSaveChanges={props.onSaveChanges}/>
+                />
             </Fab>
         </Tooltip>
     );

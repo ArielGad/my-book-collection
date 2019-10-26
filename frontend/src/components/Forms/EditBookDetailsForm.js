@@ -5,10 +5,11 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import axios from "axios";
+import {editBook} from '../../actions/index';
+import { connect } from 'react-redux';
 
 
-export default function EditBookDetailsForm(props){
+function EditBookDetailsForm(props){
     // Need to isolate id from state, since we don't want an ID as a field
     const bookId = props.bookDetails.id;
     const propsWithoutId = Object.assign({}, props.bookDetails);
@@ -24,10 +25,7 @@ export default function EditBookDetailsForm(props){
     };
 
     const onSaveChangesHandle = () => {
-        axios.put(`http://127.0.0.1:8000/api/${bookId}/`, state)
-            .then(() => props.onSaveChanges())
-            .catch(error => console.log('ERROR IS: ', error));
-
+        props.editBook(bookId, state);
         props.handleClose();
     };
 
@@ -60,3 +58,17 @@ export default function EditBookDetailsForm(props){
         </div>
     );
 }
+
+const mapStateToProps = (state, ownProps) => {
+    return {
+        bookDetails: ownProps.bookDetails
+    }
+};
+
+function mapDispatchToProps(dispatch) {
+    return {
+        editBook: (bookId, newFieldValues) => dispatch(editBook(bookId, newFieldValues))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditBookDetailsForm);
