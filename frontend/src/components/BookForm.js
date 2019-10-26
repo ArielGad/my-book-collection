@@ -5,9 +5,10 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import axios from "axios";
+import {postBookToServer} from '../actions/index'
+import { connect } from 'react-redux'
 
-export default function BookForm(props) {
+function BookForm(props) {
 
     const [state, setState] = useState(
         {
@@ -28,10 +29,7 @@ export default function BookForm(props) {
             "wiki_link": state.wiki_link,
         };
 
-        axios.post('http://127.0.0.1:8000/api/', book_details)
-            .then(() => props.onOkButtonChange())
-            .catch(error => console.log('ERROR IS: ', error));
-
+        props.postBookToServer(book_details);
         props.handleClose();
     };
 
@@ -100,3 +98,13 @@ export default function BookForm(props) {
         </div>
     );
 }
+
+function mapStateToProps (state) {
+    return {books: state.booksReducer.books};
+};
+
+function mapDispatchToProps(dispatch) {
+    return {postBookToServer: (book_details) => dispatch(postBookToServer(book_details))}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(BookForm)
