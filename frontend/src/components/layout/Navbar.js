@@ -7,6 +7,8 @@ import InputBase from '@material-ui/core/InputBase';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
+import { connect } from 'react-redux'
+import {searchContent} from '../../actions/index'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -61,8 +63,13 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function SearchAppBar() {
+function SearchAppBar(props) {
     const classes = useStyles();
+
+    const handleOnChange = (event) => {
+        event.preventDefault();
+        props.searchContent(event.target.value)
+    };
 
     return (
         <div className={classes.root}>
@@ -84,6 +91,7 @@ export default function SearchAppBar() {
                             <SearchIcon />
                         </div>
                         <InputBase
+                            onChange={handleOnChange}
                             placeholder="Search…"
                             classes={{
                                 root: classes.inputRoot,
@@ -97,3 +105,12 @@ export default function SearchAppBar() {
         </div>
     );
 }
+
+
+function mapDispatchToProps(dispatch) {
+    return {
+        searchContent: (contentToSearch) => dispatch(searchContent(contentToSearch))
+    }
+}
+
+export default connect(null, mapDispatchToProps)(SearchAppBar)
