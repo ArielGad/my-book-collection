@@ -1,7 +1,8 @@
-import {ADD_BOOK, GET_BOOKS, DELETE_BOOK, EDIT_BOOK} from '../actions/types'
+import {ADD_BOOK, GET_BOOKS, DELETE_BOOK, EDIT_BOOK, SEARCH_CONTENT} from '../actions/types'
 
 const initialState = {
     books: [],
+    searchContentValue: '',
 };
 
 const booksReducer = (state = initialState, action) => {
@@ -29,6 +30,11 @@ const booksReducer = (state = initialState, action) => {
             return {
                 ...state,
                 books: notEditedBooks.concat(action.payload),
+            };
+        case SEARCH_CONTENT:
+            return {
+                ...state,
+                searchContentValue: action.payload.toLowerCase(),
             };
 
         default:

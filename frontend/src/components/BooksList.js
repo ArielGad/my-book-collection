@@ -8,7 +8,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import DeleteButton from './buttons/DeleteButton';
 import EditButton from './buttons/EditButton';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import {deleteBook} from '../actions/index';
 
 const useStyles = makeStyles({
@@ -47,7 +47,8 @@ function BooksList(props) {
                                 <TableCell align="right">{book.author}</TableCell>
                                 <TableCell align="right">{book.language}</TableCell>
                                 <TableCell align="right">{book.date_published}</TableCell>
-                                <TableCell align="right">{<DeleteButton onClick={() => deleteBook(book.id)}/>}</TableCell>
+                                <TableCell align="right">{<DeleteButton
+                                    onClick={() => deleteBook(book.id)}/>}</TableCell>
                                 <TableCell align="left">{<EditButton bookDetails={book}/>}</TableCell>
                             </TableRow>
                         )}
@@ -58,9 +59,13 @@ function BooksList(props) {
     );
 }
 
-function mapStateToProps (state) {
-    return {books: state.booksReducer.books};
-};
+function mapStateToProps(state) {
+    return {books: state.booksReducer.books.filter(book =>
+            book.title.toLowerCase()
+                .includes(state.booksReducer.searchContentValue) ||
+            book.author.toLowerCase()
+                .includes(state.booksReducer.searchContentValue))};
+}
 
 function mapDispatchToProps(dispatch) {
     return {deleteBook: (bookId) => dispatch(deleteBook(bookId)),}

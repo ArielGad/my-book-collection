@@ -1,5 +1,5 @@
 import axios from "axios";
-import {GET_BOOKS, ADD_BOOK, DELETE_BOOK, EDIT_BOOK} from "../actions/types";
+import {GET_BOOKS, ADD_BOOK, DELETE_BOOK, EDIT_BOOK, SEARCH_CONTENT} from "../actions/types";
 
 
 export function loadBooksFromServer() {
@@ -38,4 +38,12 @@ export function editBook(bookId, newFieldValues) {
 
     }
 
+}
+
+export function searchContent(contentToSearch) {
+    return {
+        type: SEARCH_CONTENT,
+        payload: contentToSearch,
+    }
+    
 }
