@@ -1,5 +1,5 @@
 import axios from "axios";
-import {GET_BOOKS, ADD_BOOK, DELETE_BOOK, EDIT_BOOK, SEARCH_CONTENT} from "../actions/types";
+import {GET_BOOKS, ADD_BOOK, DELETE_BOOK, EDIT_BOOK, SEARCH_CONTENT, START_FETCHING, STOP_FETCHING} from "../actions/types";
 
 
 export function loadBooksFromServer() {
@@ -13,8 +13,10 @@ export function loadBooksFromServer() {
 
 export function postBookToServer(book_details) {
     return function (dispatch) {
+        dispatch(startFetching());
         return axios.post('http://127.0.0.1:8000/api/', book_details)
             .then(res => {dispatch({type: ADD_BOOK, payload: res.data})})
+            .then(() => dispatch(stopFetching()))
             .catch(error => console.log('ERROR IS: ', error));
 
 
@@ -46,4 +48,16 @@ export function searchContent(contentToSearch) {
         payload: contentToSearch,
     }
     
+}
+
+export function startFetching() {
+    return {
+        type: START_FETCHING
+    }
+}
+
+export function stopFetching() {
+    return {
+        type: STOP_FETCHING
+    }
 }

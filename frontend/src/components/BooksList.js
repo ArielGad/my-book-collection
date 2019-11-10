@@ -10,6 +10,7 @@ import DeleteButton from './buttons/DeleteButton';
 import EditButton from './buttons/EditButton';
 import {connect} from 'react-redux';
 import {deleteBook} from '../actions/index';
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const useStyles = makeStyles({
     root: {
@@ -25,11 +26,11 @@ const useStyles = makeStyles({
 
 function BooksList(props) {
     const classes = useStyles();
-    const {books, deleteBook} = props;
+    const {books, deleteBook, isFetching} = props;
     return (
         <Paper className={classes.root}>
             <div className={classes.tableWrapper}>
-                <Table stickyHeader aria-label="sticky table">
+                {isFetching ? <CircularProgress size={60} style={{ marginLeft:660, padding:100 }}/> : <Table stickyHeader aria-label="sticky table">
                     <TableHead>
                         <TableRow>
                             <TableCell><strong>Title</strong></TableCell>
@@ -53,7 +54,7 @@ function BooksList(props) {
                             </TableRow>
                         )}
                     </TableBody>
-                </Table>
+                </Table>}
             </div>
         </Paper>
     );
@@ -64,7 +65,8 @@ function mapStateToProps(state) {
             book.title.toLowerCase()
                 .includes(state.booksReducer.searchContentValue) ||
             book.author.toLowerCase()
-                .includes(state.booksReducer.searchContentValue))};
+                .includes(state.booksReducer.searchContentValue)),
+            isFetching: state.loadingReducer};
 }
 
 function mapDispatchToProps(dispatch) {
