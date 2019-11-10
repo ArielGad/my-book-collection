@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
 
 
 
-export default function AddButton(props) {
+export default function AddButton() {
 
     const handleClose = () => {
         setOpen(false);
@@ -39,7 +39,7 @@ export default function AddButton(props) {
                 <BookForm
                     open={open}
                     handleClose={handleClose}
-                    onOkButtonChange={props.onOkButtonChange}/>
+                />
             </Fab>
         </Tooltip>
     );
