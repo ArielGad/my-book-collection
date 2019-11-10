@@ -9,6 +9,7 @@ verify_ssl = true
 djangorestframework = "*"
 django-cors-headers = "*"
 django = "===2.1.11"
+wikipedia = "*"
 
 [requires]
 python_version = "3.7"
