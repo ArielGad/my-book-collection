@@ -89,15 +89,31 @@ TEMPLATES = [
 WSGI_APPLICATION = 'books_collection_project.wsgi.application'
 
 
+# This can be used to toggle between local testing db (db.sqlite3) and the PostgreSQL backend:
+DOCKER = True
+
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+if DOCKER:
+    print('*** Binding to Postgres ***')
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'postgres',
+            'USER': 'postgres',
+            'HOST': 'db',  # set in docker-compose.yml
+            'PORT': 5432  # default postgres port
+        }
     }
-}
+else:
+    print('~~~ Binding to Sqlite3 ~~~')
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
 
 
 # Password validation
