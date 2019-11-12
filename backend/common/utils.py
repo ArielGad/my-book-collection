@@ -1,5 +1,7 @@
 import string
+
 import wikipedia
+from wikipedia.exceptions import DisambiguationError, HTTPTimeoutError
 
 
 def get_wiki_link(value_to_look_for):
@@ -14,6 +16,6 @@ def get_wiki_link(value_to_look_for):
     try:
         if value_to_look_for.lower() in [content.lower() for content in wikipedia.search(value_to_look_for)]:
             return wikipedia.page(value_to_look_for).url
-    except wikipedia.exceptions:
+    except (DisambiguationError, HTTPTimeoutError):
         pass
     return 'https://en.wikipedia.org/wiki/'
