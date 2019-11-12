@@ -10,6 +10,7 @@ djangorestframework = "*"
 django-cors-headers = "*"
 django = "===2.1.11"
 wikipedia = "*"
+psycopg2-binary = "*"
 
 [requires]
 python_version = "3.7"
