@@ -3,10 +3,10 @@ from django.db import models
 
 class Book(models.Model):
     author = models.CharField(max_length=140)
-    date_published = models.PositiveIntegerField()
+    date_published = models.CharField(max_length=140)
     language = models.CharField(max_length=140)
     title = models.CharField(max_length=140)
-    wiki_link = models.URLField(blank=True)
+    wiki_link = models.URLField(blank=True, null=True)
 
     def __str__(self):
         return '{self.title} - {self.author}'.format(self=self)
