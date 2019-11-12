@@ -16,5 +16,4 @@ def get_wiki_link(value_to_look_for):
             return wikipedia.page(value_to_look_for).url
     except wikipedia.exceptions:
         pass
-    finally:
-        return 'https://en.wikipedia.org/wiki/'
+    return 'https://en.wikipedia.org/wiki/'
