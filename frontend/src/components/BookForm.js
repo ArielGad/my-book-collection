@@ -10,6 +10,7 @@ import { connect } from 'react-redux'
 
 function BookForm(props) {
 
+    const {open, handleClose, postBookToServer} = props;
     const [state, setState] = useState(
         {
             author: '',
@@ -29,8 +30,8 @@ function BookForm(props) {
             "wiki_link": state.wiki_link,
         };
 
-        props.postBookToServer(book_details);
-        props.handleClose();
+        postBookToServer(book_details);
+        handleClose();
     };
 
     const handleFieldsChange = (event) => {
@@ -42,7 +43,7 @@ function BookForm(props) {
 
     return (
         <div>
-            <Dialog open={props.open} onClose={props.handleClose} aria-labelledby="form-dialog-title">
+            <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">Book Details</DialogTitle>
                 <DialogContent>
                     <TextField
@@ -87,7 +88,7 @@ function BookForm(props) {
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={props.handleClose} color="primary">
+                    <Button onClick={handleClose} color="primary">
                         Cancel
                     </Button>
                     <Button onClick={handleAdd} color="primary">
@@ -99,9 +100,12 @@ function BookForm(props) {
     );
 }
 
-function mapStateToProps (state) {
-    return {books: state.booksReducer.books};
-};
+function mapStateToProps(state, ownProps) {
+    return {
+        handleClose: ownProps.handleClose,
+        open: ownProps.open,
+    }
+}
 
 function mapDispatchToProps(dispatch) {
     return {postBookToServer: (book_details) => dispatch(postBookToServer(book_details))}

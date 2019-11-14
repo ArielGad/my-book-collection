@@ -4,10 +4,7 @@ import BooksList from './components/BooksList'
 import Navbar from './components/layout/Navbar'
 import AddButton from './components/buttons/AddButton'
 import { connect } from 'react-redux'
-
 import {loadBooksFromServer} from './actions/index'
-
-
 
 
 class App extends Component {
@@ -27,14 +24,10 @@ class App extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    return {books: state.booksReducer.books};
-};
-
 const mapDispatchToProps = (dispatch) => {
     return {
         loadBooksFromServer: () => dispatch(loadBooksFromServer())
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(null, mapDispatchToProps)(App);

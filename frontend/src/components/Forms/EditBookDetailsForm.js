@@ -7,6 +7,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import {editBook} from '../../actions/index';
 import { connect } from 'react-redux';
+import {getSingleBookDetails} from '../../selectors/selectors'
 
 
 function EditBookDetailsForm(props){
@@ -61,7 +62,7 @@ function EditBookDetailsForm(props){
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        bookDetails: ownProps.bookDetails
+        bookDetails: getSingleBookDetails(ownProps)
     }
 };
 

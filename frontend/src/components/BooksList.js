@@ -11,6 +11,7 @@ import EditButton from './buttons/EditButton';
 import {connect} from 'react-redux';
 import {deleteBook} from '../actions/index';
 import CircularProgress from "@material-ui/core/CircularProgress";
+import {getFilteredBooks, needToDisplayLoader} from '../selectors/selectors';
 
 const useStyles = makeStyles({
     root: {
@@ -61,12 +62,8 @@ function BooksList(props) {
 }
 
 function mapStateToProps(state) {
-    return {books: state.booksReducer.books.filter(book =>
-            book.title.toLowerCase()
-                .includes(state.booksReducer.searchContentValue) ||
-            book.author.toLowerCase()
-                .includes(state.booksReducer.searchContentValue)),
-            isFetching: state.loadingReducer};
+    return {books: getFilteredBooks(state),
+            isFetching: needToDisplayLoader(state)};
 }
 
 function mapDispatchToProps(dispatch) {
