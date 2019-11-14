@@ -8,3 +8,8 @@ How to Run:
 docker-compose up & docker-compose down
 
 Execute migrtions: docker-compose run web python /code/manage.py migrate
+
+Queries on Postgress using psql:
+
+1. Connect to container using docker exec -it <container id> bash
+2. psql -h localhost -U postgres -d postgres
