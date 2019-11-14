@@ -2,4 +2,9 @@ Username: ariel_gad
 
 Password: test1234
 
+
+How to Run:
+
+docker-compose up & docker-compose down
+
 Execute migrtions: docker-compose run web python /code/manage.py migrate
