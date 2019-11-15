@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
 import EditIcon from '@material-ui/icons/Edit';
 import Tooltip from '@material-ui/core/Tooltip';
-import EditBookDetailsForm from '../Forms/EditBookDetailsForm';
+import EditBookDetailsForm from '../forms/EditBookDetailsForm';
 
 const useStyles = makeStyles(theme => ({
     fab: {
