@@ -38,6 +38,8 @@ function BooksList(props) {
                             <TableCell align="right"><strong>Author</strong></TableCell>
                             <TableCell align="right"><strong>Language</strong></TableCell>
                             <TableCell align="right"><strong>Date Published</strong></TableCell>
+                            <TableCell align="right"><strong>Delete Book</strong></TableCell>
+                            <TableCell align="left"><strong>Edit Book</strong></TableCell>
                         </TableRow>
                     </TableHead>
 
