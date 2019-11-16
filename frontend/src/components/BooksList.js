@@ -13,6 +13,8 @@ import {deleteBook} from '../actions/index';
 import CircularProgress from "@material-ui/core/CircularProgress";
 import {getFilteredBooks, needToDisplayLoader} from '../selectors/selectors';
 import _ from 'lodash';
+import SwapVertIcon from '@material-ui/icons/SwapVert';
+
 
 const useStyles = makeStyles({
     root: {
@@ -26,7 +28,6 @@ const useStyles = makeStyles({
 });
 
 
-
 function BooksList(props) {
 
     const SORT_OPTIONS = {
@@ -37,10 +38,9 @@ function BooksList(props) {
     };
 
 
-
-    const onSort = (sortBy) => {
-        setSortBy(sortBy);
-        setNeedToReverseSort(!needToReverseSort);
+    const onSort = (sortByColumn) => {
+        setNeedToReverseSort(sortBy === sortByColumn && !needToReverseSort);
+        setSortBy(sortByColumn);
     };
 
     // sort columns related
@@ -58,12 +58,13 @@ function BooksList(props) {
                     <CircularProgress size={60} style={{ marginLeft:660, padding:100 }}/>
                     :
                     <Table stickyHeader aria-label="sticky table">
+                        {/*TODO: extract TableCell into its own component*/}
                         <TableHead>
                             <TableRow>
-                                <TableCell onClick={() => onSort('TITLE')}><strong>Title</strong></TableCell>
-                                <TableCell onClick={() => onSort('AUTHOR')} align="right"><strong>Author</strong></TableCell>
+                                <TableCell onClick={() => onSort('TITLE')}><strong>Title</strong><SwapVertIcon fontSize="small" color="primary" /></TableCell>
+                                <TableCell onClick={() => onSort('AUTHOR')} align="right"><strong>Author</strong><SwapVertIcon fontSize="small" color="primary" /></TableCell>
                                 <TableCell align="right"><strong>Language</strong></TableCell>
-                                <TableCell onClick={() => onSort('DATE_PUBLISHED')} align="right"><strong>Date Published</strong></TableCell>
+                                <TableCell onClick={() => onSort('DATE_PUBLISHED')} align="right"><strong>Date Published</strong><SwapVertIcon fontSize="small" color="primary" /></TableCell>
                                 <TableCell align="right"><strong>Delete Book</strong></TableCell>
                                 <TableCell align="left"><strong>Edit Book</strong></TableCell>
                             </TableRow>
