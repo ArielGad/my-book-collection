@@ -1,0 +1,37 @@
+version: '3.7' # most recent version of Compose
+
+services:
+  db:
+    image: "postgres:10.1-alpine"
+    volumes:
+      - "postgres_data:/var/lib/postgresql/data/"
+  backend:
+    container_name: ariel_backend_container
+    build: ./backend
+    command: "python3 /app/backend/manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - ./backend:/app/backend
+    ports:
+      - "8000:8000"
+    stdin_open: true
+    tty: true
+    depends_on:
+      - db
+    links:
+      - db
+  frontend:
+    container_name: ariel_fronend_container
+    build: ./frontend
+    volumes:
+      - ./frontend:/app/frondend
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - backend
+    command: npm start
+
+volumes:
+  postgres_data:
