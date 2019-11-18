@@ -8,12 +8,14 @@ ENV PYTHONDONTWRITEBYTECODE 1  #  means Python wont try to write .pyc files
 ENV PYTHONUNBUFFERED 1  #  ensures our console output looks familiar and is not buffered by Docker
 
 # Set work directory
-WORKDIR /backend
+WORKDIR /app/backend
 
 # Install dependencies
 RUN pip install pipenv
-COPY Pipfile Pipfile.lock /backend/
+COPY Pipfile Pipfile.lock /app/backend/
 RUN pipenv install --system
 
 # Copy project
-COPY . /backend/
+COPY . /app/backend/
+
+EXPOSE 8000
