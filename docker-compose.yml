@@ -20,7 +20,7 @@ services:
     links:
       - db
   frontend:
-    container_name: ariel_fronend_container
+    container_name: ariel_frontend_container
     build: ./frontend
     volumes:
       - ./frontend:/app/frondend

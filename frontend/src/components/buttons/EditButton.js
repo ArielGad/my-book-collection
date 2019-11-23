@@ -4,6 +4,8 @@ import Fab from '@material-ui/core/Fab';
 import EditIcon from '@material-ui/icons/Edit';
 import Tooltip from '@material-ui/core/Tooltip';
 import EditBookDetailsForm from '../forms/EditBookDetailsForm';
+import PropTypes from 'prop-types';
+
 
 const useStyles = makeStyles(theme => ({
     fab: {
@@ -41,3 +43,7 @@ export default function EditButton(props) {
         </Tooltip>
     );
 }
+
+EditButton.propTypes = {
+    bookDetails: PropTypes.object,
+};
