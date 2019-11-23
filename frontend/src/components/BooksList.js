@@ -14,6 +14,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import {getFilteredBooks, needToDisplayLoader} from '../selectors/selectors';
 import _ from 'lodash';
 import SwapVertIcon from '@material-ui/icons/SwapVert';
+import PropTypes from 'prop-types';
 
 
 const useStyles = makeStyles({
@@ -100,3 +101,9 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(BooksList);
+
+BooksList.propTypes = {
+    books: PropTypes.array,
+    deleteBook: PropTypes.func,
+    isFetching: PropTypes.bool,
+};

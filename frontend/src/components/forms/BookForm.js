@@ -7,6 +7,8 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import {postBookToServer} from '../../actions/index'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types';
+
 
 function BookForm(props) {
 
@@ -112,3 +114,9 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(BookForm)
+
+BookForm.propTypes = {
+    open: PropTypes.bool,
+    handleClose: PropTypes.func,
+    postBookToServer: PropTypes.func,
+};

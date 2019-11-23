@@ -8,6 +8,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import {editBook} from '../../actions/index';
 import { connect } from 'react-redux';
 import {getSingleBookDetails} from '../../selectors/selectors'
+import PropTypes from 'prop-types';
 
 
 function EditBookDetailsForm(props){
@@ -73,3 +74,8 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditBookDetailsForm);
+
+EditBookDetailsForm.propTypes = {
+    open: PropTypes.func,
+    handleClose: PropTypes.func,
+};
