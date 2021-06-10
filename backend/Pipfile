@@ -8,7 +8,7 @@ verify_ssl = true
 [packages]
 djangorestframework = "*"
 django-cors-headers = "*"
-django = "===2.1.11"
+django = "===2.2.24"
 wikipedia = "*"
 psycopg2-binary = "*"
 
